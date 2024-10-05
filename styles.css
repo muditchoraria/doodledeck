@@ -1,0 +1,184 @@
+/* Define CSS Variables for colors and common styles */
+:root {
+    --main-bg-color: #34495e;
+    --main-text-color: #ffffff;
+    --editor-border-color: #ffffff;
+    --trail-color: gold;
+
+    --rainbow-bg-color: #34495e;
+    --rainbow-text-color: #ffffff;
+
+    --pastel-bg-color: #f8f9fa;
+    --pastel-text-color: #333333;
+    --pastel-trail-color: #FF69B4;
+
+    --neon-bg-color: #1a1a1a;
+    --neon-text-color: #00FFFF;
+    --neon-trail-color: #FFFFFF;
+
+    --button-bg-color: #ffffff;
+    --button-hover-scale: 1.1;
+
+    --bubble-color: rgba(0, 191, 255, 0.5);
+}
+
+/* Basic body styling */
+body {
+    font-family: 'Gloria Hallelujah', cursive;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    transition: background-color 1s ease;
+    overflow: hidden;
+    position: relative;
+    background-color: var(--main-bg-color);
+}
+
+/* Controls container styling */
+#controls {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 20px;
+    z-index: 3; /* Ensure controls are above animations */
+}
+
+/* Styling for control sections */
+#fontControls, #paletteControls, #asciiControls {
+    display: flex;
+    margin-bottom: 10px;
+}
+
+/* Button styling */
+button {
+    font-size: 1.5em;
+    padding: 10px 20px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    transition: transform 0.2s;
+    background-color: var(--button-bg-color);
+}
+
+/* Button hover effect */
+button:hover {
+    transform: scale(var(--button-hover-scale));
+}
+
+/* Editor styling */
+#editor {
+    width: 90%;
+    max-width: 800px;
+    height: 60vh;
+    border: 5px solid var(--editor-border-color);
+    padding: 20px;
+    overflow-y: auto;
+    font-size: 2em;
+    color: var(--main-text-color);
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 15px;
+    white-space: pre-wrap; /* Preserve space and line breaks */
+    position: relative;
+    z-index: 1;
+    transition: background-color 1s ease, color 1s ease;
+}
+
+#editor.rainbow {
+    background-color: var(--rainbow-bg-color);
+    color: var(--rainbow-text-color);
+}
+
+#editor.pastel {
+    background-color: var(--pastel-bg-color);
+    color: var(--pastel-text-color);
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1); /* Subtle text shadow */
+}
+
+#editor.neon {
+    background-color: var(--neon-bg-color);
+    color: var(--neon-text-color);
+}
+
+/* ASCII art styling */
+.ascii-art {
+    font-size: 0.5em; /* Reduced font size for ASCII art */
+    line-height: 1.2em; /* Adjust line height for better fit */
+    white-space: pre; /* Preserve spaces and line breaks */
+    display: inline-block; /* Ensure ASCII art maintains its block shape */
+}
+
+/* Mouse trail effect */
+.trail {
+    position: absolute;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 2;
+    animation: fadeOut 0.5s forwards;
+    background-color: var(--trail-color);
+}
+
+/* Animation for trail fading */
+@keyframes fadeOut {
+    to {
+        transform: scale(2);
+        opacity: 0;
+    }
+}
+
+/* Bubble animation effect */
+.bubble {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    animation: bubbleRise 5s infinite;
+    z-index: 0; /* Behind the editor */
+    background-color: var(--bubble-color);
+}
+
+/* Animation for bubbles rising */
+@keyframes bubbleRise {
+    0% { transform: translateY(0) scale(1); opacity: 1; }
+    100% { transform: translateY(-500px) scale(0.5); opacity: 0; }
+}
+
+/* Leaf falling animation effect */
+.leaf {
+    position: absolute;
+    background-color: var(--pastel-trail-color);
+    border-radius: 50%;
+    pointer-events: none;
+    animation: leafFall 6s infinite;
+    z-index: 0; /* Behind the editor */
+}
+
+/* Animation for leaves falling */
+@keyframes leafFall {
+    0% { transform: translateY(-50px) translateX(0) rotate(0); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(500px) translateX(100px) rotate(360deg); opacity: 0; }
+}
+
+/* Star falling animation effect */
+.star {
+    position: absolute;
+    width: 3px;
+    height: 3px;
+    background-color: var(--neon-trail-color);
+    pointer-events: none;
+    animation: starFall 4s infinite;
+    z-index: 0; /* Behind the editor */
+}
+
+/* Animation for stars falling */
+@keyframes starFall {
+    0% { transform: translateY(-50px); opacity: 0; }
+    50% { opacity: 1; }
+    100% { transform: translateY(500px); opacity: 0; }
+}
